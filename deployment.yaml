@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ml-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ml-app
+  template:
+    metadata:
+      labels:
+        app: ml-app
+    spec:
+      containers:
+      - name: ml-app
+        image: ml-devops-demo:local
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ml-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ml-app
+  template:
+    metadata:
+      labels:
+        app: ml-app
+    spec:
+      containers:
+      - name: ml-app
+        image: ml-devops-demo:local
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 5
